@@ -1,0 +1,202 @@
+
+
+
+<div data-section-id="{{ section.id }}" data-section-type="product">
+
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  {%- assign current_product = product -%}
+
+  <meta itemprop="name" content="{{ product.title }}{% unless product.has_only_default_variant %} - {{ current_variant.title }}{% endunless %}">
+  <meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">
+  <meta itemprop="brand" content="{{ product.vendor }}">
+  <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
+  <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
+
+  <section class="section  section--main">
+
+      <div class="row">
+        <div class="col-sm-12">
+          <span class="product-page-headline">
+            How Much Blowfish Today?
+          </span>
+        </div>
+      </div>
+
+     <nav class="product-page-nav" data-product-page-nav>
+        <div class="product-page-nav__inner"  data-product-page-nav-scroll>
+          <ul class="product-page-nav__links">
+            {%for collection in collections %}
+              {%if collection.id == 372739913 %} 
+                {%for product in collection.products%}
+                <li class="product-page-nav__links__item" data-product-page-nav-item>
+                  <a href="#{{product.handle}}"  class="product-page-nav__links__link"  data-product-page-nav-link>
+                    <span class="product-page-nav__links__link__title">
+                    {{product.title}}
+                    </span>
+                    <span class="product-page-nav__links__link__tablet-count">
+                      {{product.metafields.product['tablet_count']}}
+                    </span>
+                  </a>
+                </li>
+                {%endfor%}
+              {%endif%}
+            {%endfor%}
+          </ul>
+        </div>
+       <div class="product-page-nav__track">
+          <div class="product-page-nav__track__active-marker">
+            
+          </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div data-products>
+        {%for collection in collections %}
+          {%if collection.id == 372739913 %} 
+            {%for product in collection.products%}
+            {%assign mod = forloop.index | modulo: 2%}
+            <div class="product {%if mod == 0%}product--reverse{%endif%}" id="{{product.handle}}" data-product>
+
+                <div class="row center-md">
+                    <div class="col-sm-12 ">
+                      <div class="product__inner">
+                            
+                            <div class="row  center-md middle-md    {%if mod == 0%}reverse-md{%endif%}">
+                                  
+                              <div class="col-sm-12  col-md-6 col-lg-6">
+                                 <div class="row  center-md">
+                                    <div class="col-sm-12">  
+                                      <div class="product__images" data-product-images>
+                                          <picture>
+                                            <source srcset="{{ product.images[0].src | img_url: '900x' }}" media="(min-width: 64.0625em)">
+                                            <source srcset="{{ product.images[0].src | img_url: '700x' }}" media="(min-width: 43.8125em)">
+                                            <img src="{{ product.images[0].src | img_url: '450x' }}" alt="{{ product.images[0].alt | escape }}">
+                                          </picture>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                                    
+                              <div class="col-sm-12  col-md-6 col-lg-5">
+                                  <div class="row">
+                                    <div class="col-sm-12  columns">
+                                      <h1 class="product__title">
+                                        {{product.title}}
+                                      </h1>
+                                  
+                                       <span class="product__price">
+                                        {{product.metafields.product['tablet_count']}} |  {{product.price  | money}}
+                                       </span>
+
+                                        <div class="product__rating  yotpo bottomLine" data-product-id="{{ product.id }}">
+                                        {%- assign yotpo_offload_content = shop.metafields.yotpo.yotpo_offload_content %}
+                                        {%- assign time_now = 'now' | date: '%s' %}
+                                        {%- assign yotpo_live_time = shop.metafields.yotpo.yotpo_live | date: '%s' %}
+                                        {%- assign diff_seconds_from_live = time_now | minus: yotpo_live_time %}
+                                        {%- assign yotpo_bottomline_last_updated = product.metafields.yotpo.bottomline_update_time | date: '%s' %}
+                                        {%- assign diff_seconds_from_last_bottomline_update = time_now | minus: yotpo_bottomline_last_updated %}
+                                        {%- if yotpo_live_time and diff_seconds_from_live < 86400 and yotpo_bottomline_last_updated and diff_seconds_from_last_bottomline_update < 86400 -%}
+                                         {%- assign yotpo_bottomline_obsolete = false %}
+                                        {%- else %}
+                                         {%- assign yotpo_bottomline_obsolete = true %}
+                                        {%- endif %}
+                                        {%- if yotpo_offload_content == 'yes' and yotpo_bottomline_obsolete != true -%}
+                                         {{ product.metafields.yotpo.bottomline }}
+                                        {%- endif %}
+                                        </div>
+                                        
+                                      <div class="product__description text-micro">
+                                         {{product.description}}
+                                      </div>
+                                    </div>
+
+                                    {% unless product == empty %}
+                                    <script type="application/json" data-product-json>
+                                    {{ product | json }}
+                                    </script>
+                                    {% endunless %}
+
+                                  </div>
+                                
+                                  <div class="row  center-sm">
+                                    <div class="col-sm-12">
+                                      <!---Product Actions--> 
+                                      <div class="product__actions">                        
+
+                                        {% form 'product', product, data-product-form: '', data-product-handle: product.handle, data-enable-history-state: 'true' %}
+
+                                          <select name="id"  data-product-variants hidden>
+                                            {%for variant in product.variants%}
+                                              <option  value="{{variant.id}}" selected>{{variant.id}}</option>
+                                            {%endfor%}
+                                        </select>
+
+                                          <button class="button  button--medium  button--primary  button--expanded  product__actions__button" type="submit"
+                                                  name="add"
+                                                  data-add-to-cart
+                                                  type="submit"
+                                                  aria-label="Add selected product to cart"
+                                                  data-text="Add to Cart"
+                                                  id="AddToCart--{{section.id}}">
+                                              <span data-button-text class="button-textState1">
+                                                Add to Cart 
+                                              </span>
+                                              <span data-button-text class="button-textState2">
+                                                Add to Cart 
+                                              </span>
+                                          </button>
+                                       {%endform%}
+
+                                          <!--Payment Options--> 
+                                          {%if forloop.index == 1%}
+                                         <!--  <ul class="product__payment-options row middle-sm between-sm center-md contained-sm"  hidden>
+                                          
+                                            <li class="text-center">
+                                               <img src="{{'payment--paypal.gif' | asset_url}}" alt="Paypal" width="130" class="product__payment-options__option" >
+                                            </li>         
+                                            <li class=" text-center">
+                                              <img src="{{'payment--apple.gif' | asset_url}}" alt="Apple Pay" width="130" class="product__payment-options__option" >
+                                            </li>      
+                                            <li class=" text-center">
+                                              <img src="{{'payment--amazonPay.gif' | asset_url}}" alt="Amazon Pay" width="130" class="product__payment-options__option" >
+                                            </li>
+                                          </ul> -->
+                                          {%endif%}
+                                          <!--Payment Options--> 
+                                      </div>
+                                      <!---End Product Actions--> 
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+
+                      </div>
+                    </div>
+                </div>
+            </div>
+             {%endfor%}
+          {%endif%}
+        {%endfor%}
+      </div>
+  </section>
+
+</div>
+
+
+
+
+
+{% schema %}
+  {
+    "name": "Product pages",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_share_buttons",
+        "label": "Show social sharing buttons",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

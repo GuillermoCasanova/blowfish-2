@@ -1,0 +1,102 @@
+
+<section class="[ section section--alt section--overheadShot ] [ row  center-sm  middle-sm  ] ready-section">
+
+ <div class="ready-section__img">
+    <picture>
+      <source data-srcset="{{'guaranteePhoto--large.jpg' | asset_url}}" media="(min-width: 64.0625em)">
+      <source data-srcset="{{'guaranteePhoto--medium.jpg' | asset_url}}"  media="(min-width: 43.8125em)">
+      <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{'guaranteePhoto--small.jpg' | asset_url}}" alt="Glass of water mixed with Blowfish and Blowfish packaging next to it" class="lazyload" data-sizes="auto"  >
+    </picture>
+ </div>
+
+  <div class="container-fluid  ready-section__content">
+    <div class="row">
+    
+      <div class="col-sm-12  col-md-6 col-md-offset-1 col-lg-5">
+    
+          <h1 class="headline  ready-section__headline  {%if settings.altHeadlineOn %}headline--alt {%endif%}">
+           {{section.settings.headline}}
+          </h1>
+    
+          <p class="mb4 ready-section__body">
+          {{section.settings.body}}
+          </p>
+    
+          <div class="row  center-sm  start-md">
+    
+            <div class="col-sm-10 col-md-8  col-lg-7">
+    
+              <a href="{{section.settings.cta-link}}" rel="internal"
+                class="button  button--medium  button--secondary  button--expanded  ready-section__cta">
+    
+                <span class="button-textState1">{{section.settings.cta-label}}</span>
+                <span class="button-textState2">{{section.settings.cta-label}}</span>
+    
+              </a>
+    
+               <span class="cta-deal-label">
+                 {{section.settings.cta-deal}}
+               </span>
+    
+            </div>
+    
+          </div>
+    
+      </div>
+    
+    </div>
+  </div>
+
+</section>
+
+
+
+
+{%schema%}
+{
+  "name": "Ready? Section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "headline",
+      "label": "Ready? Headline"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Ready? Body"
+    },
+    {
+      "type": "header",
+      "content": "Call to Action"
+    },
+    {
+      "type": "url",
+      "id": "cta-link",
+      "label": "CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "cta-label",
+      "label": "CTA Label"
+    },
+    {
+      "type": "text",
+      "id": "cta-deal",
+      "label": "CTA Deal"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Sections", 
+      "name": "Ready? Section", 
+      "settings": {
+        "headline": "Ready to be Hangover-Ready?",
+        "body": "<p>You may not be hungover right now, but let’s be honest, at some point soon you definitely will be. Do your future self a favor and order some Blowfish now.</p>"
+      }
+    }
+  ]
+}
+{%endschema%}
+
+

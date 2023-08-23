@@ -1,0 +1,67 @@
+
+
+
+<div class="section--main">
+  <section class="section">
+    <div class="wrapper">
+      <div class="container-fluid">
+        <!--Contact Main Content--> 
+        <div class="row  middle-sm center-sm">
+          <div class="col-sm-12 col-md-11 col-lg-9">
+    
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="page-header">
+                  <h1 class="page-header__headline  headline">
+                    {{section.settings.headline}}
+                  </h1>
+                </div>
+              </div>
+            </div>  
+    
+            <div class="row">
+              <div class="col-sm-12  col-md-6">
+                <span class="contact-info">{{section.settings.body}}</span>      
+              </div>
+            
+              <div class="col-sm-12  col-md-6">
+                <div class="">
+                  <img src="{{section.settings.image | img_url: '1200x'}}" alt="{{section.settings.image.alt}}">
+                </div>
+              </div>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+        <!--End Contact Main Content--> 
+        </div>
+      </div>
+    </section>
+</div>
+
+
+
+{%schema%}
+{
+  "name": "Contact Page", 
+  "settings": [
+    {
+      "label": "Headline", 
+      "id": "headline",
+      "type": "text"
+    },
+    {
+      "label": "Copy", 
+      "id": "body",
+      "type": "html"
+    },
+    {
+      "label": "Contact Image", 
+      "id": "image",
+      "type": "image_picker"
+    }
+  ]
+}
+{%endschema%}
+

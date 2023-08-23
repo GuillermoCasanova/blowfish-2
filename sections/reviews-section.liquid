@@ -1,0 +1,165 @@
+
+
+
+<section class="section reviews-section">
+ <div class="row  center-md">
+   <div class="col-sm-12">
+    <div class="reviews-section__header">
+      <h1 class="reviews-section__headline {%if settings.altHeadlineOn %}headline--alt {%endif%}">
+        {{section.settings.headline}}
+      </h1>
+    </div>
+   </div>
+
+   <div class="col-sm-12 col-lg-11">
+      <ul class="section-text  [ row  top-md  ]">
+        {%for review in section.blocks%}
+         <li class="col-sm-12  col-md-4">
+            <div class="reviews-section__review">
+              <blockquote class="slideshow-quote">
+                {{review.settings.quote}}
+                <cite>
+                  - {{review.settings.customer}}
+                </cite>
+              </blockquote>
+              <div class="reviews-section__review__rating">
+               {% assign rating = review.settings.star_rating %}
+               {%for i in (1..rating) %}
+                <span class="icon-star">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.481 19.481"><path d="M10.201.758l2.478 5.865 6.344.545a.5.5 0 0 1 .285.876l-4.812 4.169 1.442 6.202a.5.5 0 0 1-.745.541l-5.452-3.288-5.452 3.288a.5.5 0 0 1-.745-.541l1.442-6.202-4.813-4.17a.5.5 0 0 1 .285-.876l6.344-.545L9.28.758a.5.5 0 0 1 .921 0z"/></svg>
+                </span>
+               {%endfor%}
+              </div>
+            </div>
+         </li>
+         {%endfor%}
+       </ul>
+
+      <div class="reviews-section__cta">
+        <a href="{{section.settings.cta-link}}" rel="internal">
+         {{section.settings.cta-label}}
+        </a>
+      </div>
+
+     </div>
+   </div>
+</section>
+
+
+{%schema%}
+{
+  "name": "Reviews",
+  "max_blocks": 3, 
+  "settings": [ 
+    {
+      "type": "text", 
+      "label": "Headline",
+      "id": "headline"
+    },
+    {
+      "type": "header", 
+      "content": "Link Settings"
+    },
+    {
+      "type": "url", 
+      "label": "CTA Link",
+      "id": "cta-link"
+    }, 
+    {
+      "type": "text", 
+      "label": "CTA Label",
+      "id": "cta-label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Quote",
+      "settings": [
+        {
+          "label": "Review Quote",
+          "id": "quote", 
+          "type": "text"
+        },
+        {
+          "label": "Customer",
+          "id": "customer", 
+          "type": "text"
+        },
+        {
+          "type":      "range",
+          "id":        "star_rating",
+          "min":       1,
+          "max":        5,
+          "step":       1,
+          "unit":       "str",
+          "label":     "Star Rating",
+          "default":   1
+        }
+      ]
+    } 
+  ],
+  "presets": [
+    {
+      "category": "Sections", 
+      "name": "Reviews", 
+      "blocks": [
+        {
+          "type": "quote",
+          "settings": {
+            "quote": "This is a wonderful quote about Blowfish.", 
+            "star_rating": 5
+          }
+        } 
+      ]
+    }
+  ]
+}
+{%endschema%}
+
+  
+{%javascript%}
+//<script>
+if ($('[data-ui-component="reviews-carousel"]').length > 0) {
+  var medium = 641,
+        large = 1025,
+        $carousel = $('[data-ui-component="reviews-carousel"]');
+
+        
+    $carousel.slick({
+        autoPlay: true,
+        autoPlaySpeed: 300,
+        arrows: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        speed: 300,
+        infinite: true,
+        fade: false,
+        dots: false,
+        mobileFirst: true,
+        pauseOnHover: true,
+        responsive: [{
+            breakpoint: medium,
+            settings: 'unslick'
+        }]
+    });
+
+    $carousel.on("breakpoint", function(t, a, o) {
+        a.$slider.find("button").text("");
+
+        a.$slider.find("button").html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129"><path d="M40.4 121.3c-.8.8-1.8 1.2-2.9 1.2s-2.1-.4-2.9-1.2c-1.6-1.6-1.6-4.2 0-5.8l51-51-51-51c-1.6-1.6-1.6-4.2 0-5.8 1.6-1.6 4.2-1.6 5.8 0l53.9 53.9c1.6 1.6 1.6 4.2 0 5.8l-53.9 53.9z"/></svg>')
+    });
+
+    $carousel.on("init", function(t, a, o) {
+        a.$slider.find("button").text("");
+
+        a.$slider.find("button").html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129"><path d="M40.4 121.3c-.8.8-1.8 1.2-2.9 1.2s-2.1-.4-2.9-1.2c-1.6-1.6-1.6-4.2 0-5.8l51-51-51-51c-1.6-1.6-1.6-4.2 0-5.8 1.6-1.6 4.2-1.6 5.8 0l53.9 53.9c1.6 1.6 1.6 4.2 0 5.8l-53.9 53.9z"/></svg>')
+    });
+
+    $carousel.find("button").text("");
+
+    $carousel.find("button").html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129"><path d="M40.4 121.3c-.8.8-1.8 1.2-2.9 1.2s-2.1-.4-2.9-1.2c-1.6-1.6-1.6-4.2 0-5.8l51-51-51-51c-1.6-1.6-1.6-4.2 0-5.8 1.6-1.6 4.2-1.6 5.8 0l53.9 53.9c1.6 1.6 1.6 4.2 0 5.8l-53.9 53.9z"/></svg>');
+}
+//</script>
+{%endjavascript%}
+

@@ -1,0 +1,180 @@
+
+
+
+{%if template != 'cart'%}
+  {%if section.settings.email-capture-active %}
+  <div class="footer-email-sign-up {%if section.settings.email-capture-color-scheme == 'dark' %}footer-email-sign-up--alt {%endif%}">
+    <div class="footer-email-sign-up__inner">
+        <div class="container-fluid">
+            <div class="row  center-sm">
+              <div class="col-sm-12 col-lg-9">
+                <div class="row  columns-sm  row-md  middle-md">
+                  <div class="col-sm-12  col-md-6 col-lg-5 ">
+                    <h1 class="footer-email-sign-up__headline {%if settings.altHeadlineOn %}headline--alt {%endif%}">
+                      {{section.settings.email-capture-headline}}
+                    </h1>
+                  </div>
+                  <div class="col-sm-12  col-md-6  col-lg-6">
+                    <div class="footer-email-sign-up__embed">
+                      {{section.settings.email-capture-embed}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  {%endif%}
+{%endif%}
+
+<footer class="{%if template.suffix == 'science' %}narrative-footer {%endif%}">
+
+  <div class="footer__bg">
+    <picture>
+      <source media="(min-width: 64.0625em)" srcset="{{'bubbles--footer--large.svg' | asset_url}}">
+      <source media="(min-width: 43.8125em)" srcset="{{'bubbles--footer--medium.svg' | asset_url}}">
+      <img src="{{'bubbles--footer--small.svg' | asset_url}}"  alt="Blowfish character floating in bubbles">
+    </picture>
+  </div>
+
+  <div class="container-fluid  footer__content">
+    <div class="row  center-md">
+        <div class="col-sm-12 col-lg-11">
+            <div class="row  middle-sm  around-md">
+                <div class="col-sm-12  col-md-3">
+                    <div class="row  center-sm  end-md">
+                      <div class="col-sm-8  col-md-11 col-lg-9">
+                        <div class="footer__logo">
+                          <a href="/" rel="internal" title="Blowfish Homepage">
+                            <img src="{{'logo--blowfish--white.svg' | asset_url}}" 
+                               alt="Blowfish logo"
+                               title="Blowfish Logo"
+                               width="260">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+    
+                    <div class="row show-for-medium-up center-sm end-md">
+                      <div class="col-sm-12">
+    
+                        <div class="footer__social">
+                          {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
+                            <ul class="row  around-md  end-md  contained-sm">
+                              
+                              {% for social in social_accounts %}
+                                 {%- assign social_handle = social | handleize -%}
+                                  {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+                                  {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
+                              
+                                  {% if settings[social_link] != blank %}
+                                    <li>
+                                      <a href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}" class="footer__social__link">
+                                        {% include social_icon %}
+                                      </a>
+                                    </li>
+                                  {% endif %}
+                              {% endfor %}
+                            </ul>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+    
+                <div class="col-sm-12  col-md-8  col-lg-7  col-lg-offset-2">
+                  {%- assign footer_linklist = section.settings.footer_linklist -%}
+                  {% if linklists[footer_linklist].links.size > 0 %}
+                  <ul class="footer-nav  row  columns-sm  middle-sm  row-md  around-md">
+                    {% for link in linklists[footer_linklist].links %}
+                      <li class="footer-nav__item"><a href="{{ link.url }}" class="footer-nav__link">{{ link.title }}</a></li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row show-for-medium-up">
+      <div class="col-md-12">
+         <span class="footer__credit">  
+         {{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }} Rally Labs LLC </span>
+      </div>
+    </div>
+    
+    <div class="row  hide-for-medium-up">
+        <div class="col-sm-12">
+          <div class="footer__social">
+            {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
+              <ul class="row  around-sm  center-sm  contained-sm">
+            
+                {% for social in social_accounts %}
+                   {%- assign social_handle = social | handleize -%}
+                    {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+                    {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
+            
+                    {% if settings[social_link] != blank %}
+                      <li>
+                        <a href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}" class="">
+                          {% include social_icon %}
+                        </a>
+                      </li>
+                    {% endif %}
+                {% endfor %}
+              </ul>
+          </div>
+        </div>
+    
+        <div class="col-sm-12">
+            <span class="footer__credit">
+                {{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }} Rally Labs LLC
+            </span>
+        </div>
+    
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "footer_linklist",
+        "label": "First menu",
+        "default": "footer"
+      },
+      {
+        "type": "header", 
+        "content": "Email Capture Section"
+      },
+      {
+        "type": "checkbox", 
+        "id": "email-capture-active", 
+        "label": "Email Capture Active"
+      },
+      {
+        "type": "text", 
+        "id": "email-capture-headline", 
+        "label": "Headline"
+      },
+      {
+        "type": "html", 
+        "id": "email-capture-embed", 
+        "label": "Form Embed"
+      },
+      {
+        "type": "radio", 
+        "id": "email-capture-color-scheme", 
+        "label": "What color scheme to use for the capture section?",
+         "options": [
+           { "value": "dark", "label": "Dark Color Scheme" },
+           { "value": "light", "label": "Light Color Scheme" }
+         ]
+      }
+    ]
+  }
+
+{% endschema %}

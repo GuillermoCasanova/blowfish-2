@@ -1,0 +1,77 @@
+
+<!--Introduction section-->
+ <section class="intro-section">
+  <div class="intro-section__inner">
+    <div class="container-fluid">
+     <div class="row  middle-md">
+
+      <div class="col-sm-12 col-md-6 col-md-offset-1 col-lg-5">
+        <div class="intro-section__content">
+          <h1 class="headline  intro-section__headline {%if settings.altHeadlineOn %}headline--alt {%endif%}">
+           {{section.settings.headline}}
+           </h1>
+           <p>
+             {{section.settings.body}}
+           </p>
+        </div>
+      </div>
+
+      <div class="col-sm-12  col-md-4  col-md-offset-1">
+        <picture>
+          <source srcset="{{'introPhoto--large2.gif' | asset_url }}" 
+                        media="(min-width: 64.0625em)">
+                <source srcset="{{'introPhoto--medium2.gif' | asset_url }}" 
+                        media="(min-width: 43.8125em)">
+                <img src="{{'introPhoto--small2.jpg' | asset_url }}" alt="Man laying down on floor with hangover next to cup of coffee needing Blowfish" data-sizes="auto" class="intro-section__img hide-for-large-up">
+        </picture>
+        
+      </div>
+
+    </div>
+  </div>
+
+    <picture>
+      <source srcset="{{'introPhoto--large2.gif' | asset_url }}" 
+                    media="(min-width: 64.0625em)">
+            <source srcset="{{'introPhoto--medium2.gif' | asset_url }}" 
+                    media="(min-width: 43.8125em)">
+            <img src="{{'introPhoto--small2.jpg' | asset_url }}" alt="Man laying down on floor with hangover next to cup of coffee needing Blowfish" data-sizes="auto" class="intro-section__img show-for-large-up">
+    </picture>
+
+  </div>
+</section>
+
+
+
+{%schema%}
+{
+  "name": "Intro Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Section Headline"
+    }, 
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Section Body Copy"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Sections", 
+      "name": "Intro Section", 
+      "settings": {
+        "headline": "A headline for this section of copy",
+        "body": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>"
+      }
+    }
+  ]
+}
+{%endschema%}
+
+
+
+
+

@@ -1,0 +1,148 @@
+
+<div class="section--main"  id="Cart-page">
+
+  {% if cart.item_count > 0 %}
+  <section class="section">
+  
+  <div class="container-fluid">
+    <!--Begin headline-->
+    <div class="row center-sm">
+      <div class="col-sm-12 col-md-11 col-sm-9">
+        <div class="page-header">
+          <h1 class="headline {%if settings.altHeadlineOn %}headline--alt {%endif%}">
+          {{ 'cart.general.title' | t }}
+          </h1>
+        </div>
+      </div>
+    </div>
+    <!--End Headline--> 
+        
+    <!--Cart Main Content--> 
+    <div class="cart  ">
+      <div class="row  center-sm  middle-sm">
+        <div class="col-sm-12 col-md-11">
+          <div class="cart__inner">
+            <!--Cart form begins-->
+            <form action="/cart" method="post" novalidate data-cart-form>
+              <div class="cart__line-items">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <table class="responsive-table  table--primary">
+                    <thead>
+                      <tr>
+                        <th class="show-for-medium-up"></th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                      {% for item in cart.items %}
+                        <tr class="cart__line-item responsive-table-row" >  
+                      
+                          <td class="show-for-medium-up text-center">
+                            {% if item.image != blank %}
+                              <a href="{{ item.url | within: collections.all }}" class="cart__line-item__image">
+                                <img src=" {{ item | img_url: '240x240'}} " alt="{{item.title}}">
+                              </a>
+                            {% endif %}
+                          </td>
+                      
+                          <td>
+                            <a href="{{ item.url }}" class="cart__line-item__title">{{ item.product.title }}</a>
+                            <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="cart__line-item__remove  visually-hidden" data-remove-item>
+                              <small>{{ 'cart.general.remove' | t }}</small>
+                            </a>
+                          </td>
+                      
+                          <td>
+                            <div class="cart__line-item__price">
+                               {% if item.original_line_price != item.line_price %}
+                              <span class="visually-hidden">{{ 'cart.label.discounted_price' | t }}</span>
+                              {{ item.price | money }}
+                              <span class="visually-hidden">{{ 'cart.label.original_price' | t }}</span>
+                              <span>{{ item.original_price | money }}</span>
+                            {% else %}
+                              {{ item.price | money }}
+                            {% endif %}
+                              </div>
+                          </td>
+                      
+                          <td>
+                            <div class="select-wrapper  select-wrapper--primary  select-wrapper--small  cart__qty-select">
+                              <select id="updates_{{ item.id }}" name="updates[]" aria-label="{{ 'cart.general.item_quantity' | t }}" data-quantity-select onChange="this.form.submit();"> 
+                               {% for i in (0..10) %} {% assign q = i %}
+                                   <option value="{{ q }}"{% if item.quantity == q %} selected{% endif %}>{{ i }}</option>
+                               {% endfor %}
+                               </select>
+                            </div>
+                          </td>
+                      
+                          <td>
+                            <span>
+                               {{ item.line_price | money }}
+                            </span>
+                          </td>
+                      
+                        </tr>
+                      {%endfor%}
+                    
+                    
+                    </tbody>
+                    
+                    </table>
+                    
+                  </div>
+                    
+                </div>
+              </div>
+                  
+              <div class="cart__pricing  row  middle-sm  end-sm  contained-sm">
+                <span class="cart__pricing__total-label"> Total: </span>
+                <p class="cart__pricing__total">{{ cart.total_price | money }}</p></span>
+              </div>
+  
+              {% if cart.total_discounts > 0 %}
+                <div class="cart-discounts">
+                  <p>{{ 'cart.general.savings' | t }} {{ cart.total_discounts | money }}</p>
+                </div>
+              {% endif %}
+              
+               <div class="row end-sm contained-sm">
+                <div class="cart__cta-container">
+                   <button type="submit" name="checkout" class="button button--secondary  button--small  button--expanded cart__cta" id="goto-shopify-checkout">
+                     
+                     <span class="button-textState1">{{ 'cart.general.checkout' | t }}</span>
+                     <span class="button-textState2">{{ 'cart.general.checkout' | t }}</span>
+                     
+                   </button>
+                  <!--  <p class="cart__shipping-costs-note">{{ 'cart.general.shipping_at_checkout' | t }}</p> -->
+                </div>
+              </div>
+            </div>
+          
+            </table>
+                  
+                  
+            </form>
+            <!--Cart form Ends-->
+          </div>
+      
+        </div>
+      </div>
+    </div>
+    <!--End Cart Main Content-->
+  
+    </div>
+  </section>
+  
+  {% else %}
+  
+  {%section 'cart-empty'%}
+  
+  {% endif %}
+
+</div>
+

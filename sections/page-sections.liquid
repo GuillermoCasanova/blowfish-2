@@ -1,0 +1,71 @@
+
+
+
+<div>
+	{% for block in section.blocks %}
+	<div {{ block.shopify_attributes }}>
+		{% case block.type %}
+
+		{%when 'email-capture-template'%}
+		{%include 'snippet_email-capture-template'%}
+
+		{%when 'coupon-code-template'%}
+		{%include 'snippet_coupon-code-template'%}
+
+		{%endcase%}
+	</div>
+	{%endfor%}
+
+</div>
+
+
+{%schema%}
+{
+	"blocks": [
+	{
+		"type": "email-capture-template",
+		"name": "Email Capture Template", 
+		"settings": [
+				{
+					"id": "headline",
+					"type": "text",
+					"label": "Email Capture Headline"
+				},
+				{
+					"id": "body",
+					"type": "richtext",
+					"label": "Email Capture Body"
+				},
+				{
+					"id": "image",
+					"type": "image_picker",
+					"label": "Email Capture Image"
+				}
+			]
+	},
+	{
+		"type": "coupon-code-template",
+		"name": "Coupon Code template", 
+		"settings": [
+				{
+					"id": "headline",
+					"type": "text",
+					"label": "Email Capture Headline"
+				},
+				{
+					"id": "body",
+					"type": "richtext",
+					"label": "Email Capture Body"
+				},
+				{
+					"id": "image",
+					"type": "image_picker",
+					"label": "Email Capture Image"
+				}
+		]
+	}
+	]
+}
+{%endschema%}
+
+

@@ -1,0 +1,87 @@
+
+<section class="empty-cart  section--main">
+          
+  <!--Contact Main Content--> 
+  <div class="row  middle-md  center-md">
+    <div class="col-sm-12  col-md-11  col-lg-9">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          
+           <h1 class="headline  empty-cart__headline">
+            {{ 'cart.general.empty' | t }}
+           </h1>
+
+           <div class="empty-cart__body">
+             {{section.settings.body}}
+           </div>
+
+          {% comment %}
+          Cart empty state
+          {% endcomment %}
+          <a href="{{section.settings.cta-link}}" rel="internal" 
+            class="button  button--medium  button--secondary  button--expanded  empty-cart__cta  supports-cookies">
+            <span class="button-textState1">{{section.settings.cta-label}}</span>
+            <span class="button-textState2">{{section.settings.cta-label}}</span>
+          </a>
+          
+          {% comment %}
+          Cart no cookies state
+          ---------------------
+          Browser cookies are required to use the cart. If cookies aren't enabled in the
+          browser a message is displayed prompting the user to enable them.
+          {% endcomment %}
+          <span class="supports-no-cookies">
+            <p>{{ 'cart.general.cookies_required' | t }}</p>
+          </span>
+
+             
+          </div>
+          <div class="col-lg-6">
+            <div class="show-for-large-up">
+              <img src="{{'animation--headache--medium.gif' | asset_url}}" alt="Woman hungover laying head on desk">
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <!--End Contact Main Content--> 
+</section>
+
+
+{%schema%}
+{ 
+  "name": "Empty Cart",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Headline",
+      "info": "Headline for empty cart page is edited in the theme's general settings."
+    },
+    {
+      "type": "richtext", 
+      "id": "body", 
+      "label": "Body"
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "text", 
+      "id": "cta-label", 
+      "label": "CTA Label"
+    },
+    {
+      "type": "url", 
+      "id": "cta-link", 
+      "label": "CTA Link"
+    }
+  ]
+}
+
+{%endschema%}
+
+
+
+
+

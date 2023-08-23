@@ -1,0 +1,142 @@
+
+<div>
+
+	{% for block in section.blocks %}
+	<div {{ block.shopify_attributes }}>
+		{% case block.type %}
+
+		{%when 'email-capture-template'%}
+		{%include 'snippet_email-capture-template'%}
+	
+		{%when 'code-offer-template'%}
+		{%include 'snippet_code-offer-template'%}
+
+
+		{%when 'promo-press-template'%}
+		{%include 'snippet_promo-press-template'%}
+
+		{%endcase%}
+	</div>
+	{%endfor%}
+
+</div>
+
+
+{%stylesheet%}
+
+#shopify-section-footer {
+	display: none !important; 
+}
+
+.mainNav {
+	display: none !important; 
+}
+
+{%endstylesheet%}
+
+
+{%schema%}
+{
+	"blocks": [
+	{
+		"type": "email-capture-template",
+		"name": "Email Capture Template", 
+		"settings": [
+				{
+					"id": "headline",
+					"type": "text",
+					"label": "Headline"
+				},
+				{
+					"id": "body",
+					"type": "richtext",
+					"label": "Body"
+				},
+				{
+					"id": "image",
+					"type": "image_picker",
+					"label": "Image"
+				},
+				{
+					"id": "email-embed",
+					"type": "html",
+					"label": "Email Embed Code"
+				}
+			]
+	},
+	{
+		"type": "code-offer-template",
+		"name": "Code Offer Template", 
+		"settings": [
+			{
+				"id": "headline",
+				"type": "text",
+				"label": "Headline"
+			},
+			{
+				"id": "body",
+				"type": "richtext",
+				"label": "Body"
+			},
+			{
+				"id": "code",
+				"type": "text",
+				"label": "Code"
+			},
+			{
+				"id": "image",
+				"type": "image_picker",
+				"label": "Image"
+			},
+			{
+				"id": "cta-label",
+				"type": "text",
+				"label": "CTA Label"
+			},
+			{
+				"id": "cta-link",
+				"type": "url",
+				"label": "CTA Link"
+			}
+		]
+	},
+	{
+		"type": "promo-press-template",
+		"name": "Promo Press Template",
+		"settings": [
+			{
+				"id": "press-logo-one", 
+				"type": "image_picker", 
+				"label": "Press Logo"
+			},
+			{
+				"id": "press-logo-two", 
+				"type": "image_picker", 
+				"label": "Press Logo"
+			},
+			{
+				"id": "press-logo-three", 
+				"type": "image_picker", 
+				"label": "Press Logo"
+			},
+			{
+				"id": "press-logo-four", 
+				"type": "image_picker", 
+				"label": "Press Logo"
+			},
+			{
+				"id": "press-logo-five", 
+				"type": "image_picker", 
+				"label": "Press Logo"
+			},
+			{
+				"id": "slogan", 
+				"type": "text", 
+				"label": "Slogan"
+			}
+		]
+	}
+	]
+}
+{%endschema%}
+

@@ -1,0 +1,46 @@
+
+<main>
+	<section class="landing-promo">
+		<div class="landing-promo__inner">
+			<div class="container-fluid">
+				<div class="row center-lg">
+					<div class="col-sm-12  col-lg-10">
+						<div class="row">
+							<div class="col-sm-12 col-md-6">
+								<div class="landing-promo__image">
+									<img src="{{block.settings.image | img_url: '800x'}}" alt="{{block.settings.image.alt}}">
+								</div>
+							</div>
+							<div class="col-sm-12 col-md-6">
+								<div>
+									<div class="landing-promo__logo">
+										<img src="{{'logo--blowfish.svg' | asset_url}}" alt="Blowfish Logo">
+									</div>
+								</div>
+								
+								<div>
+									<h1 class="landing-promo__headline">
+										{{block.settings.headline}}
+									</h1>
+				
+									{{block.settings.body}}
+						
+									<p class="landing-promo__code">
+										Code:
+										<span class="code">{{block.settings.code}}</span>
+									</p>
+						
+									<a  class="button button--secondary button--medium" rel="internal" href="{{block.settings.cta-link}}">
+									  <span class="button-textState1">{{block.settings.cta-label}}</span>
+				                      <span class="button-textState2">{{block.settings.cta-label}}</span>
+										
+									</a>
+								</div>
+							
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>

@@ -1,0 +1,228 @@
+
+<section class="section how-it-works" data-action="trigger-glass-diagram-anim">
+  <div class="wrapper">
+    <div class="container-fluid">
+      <div class="row center-sm">
+      
+          <div class="col-sm-12 col-md-11">
+      
+              <div class="row">
+      
+               <div class="col-sm-12">
+                  <div class="how-it-works__header">
+                   <h1 class="headline  {%if settings.altHeadlineOn %}headline--alt {%endif%}">
+                     {{section.settings.headline}}
+                    </h1>
+                    
+                    <p class="section-text">
+                     {{section.settings.body}}
+                    </p>
+                  </div>
+      
+                </div>
+      
+                <div class="col-sm-12 columns">
+      
+                  <div class="row  center-md">
+      
+                    <div class="col-sm-12  col-md-10">
+      
+                      <img data-src="{{'illustr--glassDiagram--static.svg' | asset_url}}"
+                           src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                           class="glassDiagram  hide-for-medium-up lazyload"
+                           data-sizes="auto"
+                           alt="Glass Diagram of Blowfish"
+                           title="Glass Diagram of Blowfish"
+                           width="800">
+      
+                      <div class="glassDiagram  show-for-medium-up"
+                           data-ui-component="glass-diagram-animation">
+      
+                          <img data-src="{{'illustr--glassDiagram.svg' | asset_url}}"
+                               class="glassDiagram-glass lazyload"
+                               src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                               alt="Glass Diagram of Blowfish"
+                               title="Glass Diagram of Blowfish"
+                               data-expand="-50"
+                               width="800">
+      
+                          <div class="glassDiagram-bulletContainer">
+      
+      
+                              <div class="[ glassDiagram-bullet  glassDiagram-bullet--bubbles ]   [ row  between-sm middle-sm  ] ">
+      
+                                <div class="glassDiagram-bullet-icon">
+      
+      
+                                </div>
+      
+                                <div class="glassDiagram-bullet-text">
+      
+                                    Effervescence
+      
+                                </div>
+      
+                              </div>
+      
+                              <div class="[ glassDiagram-bullet  glassDiagram-bullet--reverse  glassDiagram-bullet--h2o  glassDiagram-bullet--reverse ] [ row  between-sm middle-sm  ]">
+      
+                                <div class="glassDiagram-bullet-icon">
+      
+      
+                                </div>
+      
+                                <div class="glassDiagram-bullet-text">
+      
+                                    H<sub>2</sub>O
+      
+                                </div>
+      
+                              </div>
+      
+                              <div class="[ glassDiagram-bullet  glassDiagram-bullet--reverse   glassDiagram-bullet--caffeine  glassDiagram-bullet--reverse  ] [ row  between-sm middle-sm  ]">
+      
+                                <div class="glassDiagram-bullet-icon">
+      
+      
+                                </div>
+      
+                                <div class="glassDiagram-bullet-text">
+      
+                                   Caffeine
+      
+                                </div>
+      
+                              </div>
+      
+                              <div class="glassDiagram-bullet  glassDiagram-bullet--aspirin  row  between-sm middle-sm ">
+      
+                                <div class="glassDiagram-bullet-icon">
+      
+      
+                                </div>
+      
+                                <div class="glassDiagram-bullet-text">
+      
+                                   Aspirin
+      
+                                </div>
+      
+                              </div>
+      
+                          </div>
+      
+                      </div>
+      
+                    </div>
+      
+                  </div>
+      
+                </div>
+      
+              </div>
+      
+              <div class="row center-sm">
+      
+                <div class="col-sm-10  col-md-6 col-lg-5">
+      
+                  <a href="{{section.settings.cta-link}}"
+                     title="{{section.settings.cta-label}}"
+                     rel="internal" 
+                     class="button  button--small  button--secondary  button--expanded  how-it-works__cta">
+      
+                    <span class="button-textState1">{{section.settings.cta-label}}</span>
+                    <span class="button-textState2">{{section.settings.cta-label}}</span>
+      
+                  </a>
+      
+                   <span class="cta-deal-label">
+                    {{section.settings.cta-deal}}
+                   </span>
+      
+                </div>
+      
+              </div>
+      
+      
+          </div>
+      
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{%javascript%}
+$(document).ready(function() {
+  
+  if($('[data-ui-component="glass-diagram-animation"]').length > 0 ) {
+
+    var glassDiagramAnimCtrl = new ScrollMagic.Controller(); 
+
+    var glassDiagram = '[data-ui-component="glass-diagram-animation"]';
+
+    var classToggle = 'is-showing-bullets'; 
+
+
+    new ScrollMagic.Scene({
+        triggerElement: '[data-action="trigger-glass-diagram-anim"]',
+        offset: 300      })
+    .setClassToggle(glassDiagram, classToggle)
+    .addTo(glassDiagramAnimCtrl); 
+
+  }
+
+}); 
+{%endjavascript%}
+
+
+{%schema%}
+{
+  "name": "How Does It Work Section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "headline",
+      "label": "Section Headline"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Section Body"
+    },
+    {
+      "type": "header",
+      "content": "Call to Action"
+    },
+    {
+      "type": "text",
+      "id": "cta-label",
+      "label": "CTA Link"
+    },
+    {
+      "type": "url",
+      "id": "cta-link",
+      "label": "CTA Label"
+    },
+    {
+      "type": "text",
+      "id": "cta-deal",
+      "label": "CTA Deal"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Sections", 
+      "name": "How Does It Work Section", 
+      "settings": {
+        "headline": "A headline for how does it work",
+        "body": "<p>Just drop two tablets in water and drink. Blowfish is real medicine specifically formulated to relieve hangover symptoms. The effervescent tablets rapidly deliver maximum-strength pain reliever and pharmaceutical-grade caffeine to your hurting body, while being gentle on your stomach. So don’t worry. Everything’s gonna be okay.</p>"
+      }
+    }
+  ]
+}
+{%endschema%}
+
+
+
+

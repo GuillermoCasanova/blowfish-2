@@ -1,0 +1,123 @@
+
+
+  {% comment %} <header role="banner">
+    <h1>{{ collection.title }}</h1>
+    {% if collection.description != blank %}
+      <div class="rte">
+        {{ collection.description }}
+      </div>
+    {% endif %}
+
+    {% if collection.all_tags.size > 0 %}
+      <ul>
+        {% for tag in collection.all_tags %}
+          {% if current_tags contains tag %}
+            <li class="active">
+              {{ tag | link_to_remove_tag: tag }}
+            </li>
+          {% else %}
+            <li>
+              {{ tag | link_to_tag: tag }}
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </header> 
+  {% endcomment %}
+
+<section class="collection-container section  section--main">
+    <div class="container-fluid">
+    
+      <div class="row">
+        <div class="col-sm-12">
+          <span class="product-page-headline">
+            How Much Blowfish Today?
+          </span>
+        </div>
+      </div>
+
+      <div class="row stretch-md">
+      {% for product in collection.products %}
+      <div class="col-sm-12  col-md-6">
+        <div class="collection-product">
+          <div class="collection-product__inner">
+            <div class="collection-product__image">
+              <picture>
+                <source srcset="{{ product.images[0].src | img_url: '900x' }}" media="(min-width: 64.0625em)">
+                <source srcset="{{ product.images[0].src | img_url: '700x' }}" media="(min-width: 43.8125em)">
+                <img src="{{ product.images[0].src | img_url: '450x' }}" alt="{{ product.images[0].alt | escape }}">
+              </picture>
+            </div>
+
+            <div class="collection-product__info">
+                <div> 
+                  <h1 class="collection-product__title">
+                    {{product.title}}
+                  </h1>
+              
+                  <span class="collection-product__price">
+                    {{product.metafields.product['tablet_count']}} |  {{product.price  | money}}
+                  </span>
+
+                    <div class="collection-product__rating  yotpo bottomLine" data-product-id="{{ product.id }}">
+                      {%- assign yotpo_offload_content = shop.metafields.yotpo.yotpo_offload_content %}
+                      {%- assign time_now = 'now' | date: '%s' %}
+                      {%- assign yotpo_live_time = shop.metafields.yotpo.yotpo_live | date: '%s' %}
+                      {%- assign diff_seconds_from_live = time_now | minus: yotpo_live_time %}
+                      {%- assign yotpo_bottomline_last_updated = product.metafields.yotpo.bottomline_update_time | date: '%s' %}
+                      {%- assign diff_seconds_from_last_bottomline_update = time_now | minus: yotpo_bottomline_last_updated %}
+                      {%- if yotpo_live_time and diff_seconds_from_live < 86400 and yotpo_bottomline_last_updated and diff_seconds_from_last_bottomline_update < 86400 -%}
+                      {%- assign yotpo_bottomline_obsolete = false %}
+                      {%- else %}
+                      {%- assign yotpo_bottomline_obsolete = true %}
+                      {%- endif %}
+                      {%- if yotpo_offload_content == 'yes' and yotpo_bottomline_obsolete != true -%}
+                      {{ product.metafields.yotpo.bottomline }}
+                      {%- endif %}
+                    </div>
+                    
+                  <div class="collection-product__description text-micro">
+                    {{product.description}}
+                  </div>
+                </div>
+
+                <div class="collection-product__actions">
+                    {% form 'product', product, data-product-form: '', data-product-handle: product.handle, data-enable-history-state: 'true' %}
+
+                      <select name="id"  data-product-variants hidden>
+                        {%for variant in product.variants%}
+                          <option  value="{{variant.id}}" selected>{{variant.id}}</option>
+                        {%endfor%}
+                      </select>
+
+                      <button class="button  button--medium  button--primary  button--expanded  collection-product__actions__button" type="submit"
+                              name="add"
+                              data-add-to-cart
+                              type="submit"
+                              aria-label="Add selected product to cart"
+                              data-text="Add to Cart"
+                              id="AddToCart--{{section.id}}">
+                          <span data-button-text class="button-textState1">
+                            Add to Cart 
+                          </span>
+                          <span data-button-text class="button-textState2">
+                            Add to Cart 
+                          </span>
+                      </button>
+                  {%endform%}
+                  </div>
+                </div>
+
+                {% unless product == empty %}
+                <script type="application/json" data-product-json>
+                {{ product | json }}
+                </script>
+                {% endunless %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

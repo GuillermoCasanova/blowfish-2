@@ -1,0 +1,46 @@
+
+<!--We party headline-->
+<div class="section  shoutout">
+
+	 <div class="shoutout__background">
+
+	 </div>
+
+	 <div class="row center-sm">
+
+	    <div class="col-sm-12 col-md-10">
+
+	     <h1 class="shoutout__headline">
+	      {{section.settings.headline}}
+	     </h1>
+
+	    </div>
+
+	 </div>
+
+</div>
+
+
+
+{%schema%}
+{
+  "name": "Shoutout Section",
+  "settings": [
+    {
+      "type": "html",
+      "id": "headline",
+      "label": "Shoutout Headline"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Sections", 
+      "name": "Shoutout Section", 
+      "settings": {
+        "headline": "Hello, this is a shoutout!"
+      }
+    }
+  ]
+}
+{%endschema%}
+

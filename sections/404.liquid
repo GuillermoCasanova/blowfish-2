@@ -1,0 +1,85 @@
+
+<!--Begin 404--> 
+<div class="section--main">
+  <section class="error-page  row middle-md">
+    <div class="container-fluid">
+      
+        <div class="row  reverse-md">
+      
+          <div class="col-sm-12 col-md-6">
+              
+            <div class="error-page__image">
+      
+            </div>
+          
+          </div>
+      
+          <div class="col-sm-12 col-md-6 col-lg-5">
+              
+            <div class="n">
+      
+              <h1 class="headline error-page__headline">
+                  404 - oh dear, page not found
+              </h1>
+                
+              <div class="error-page__body">
+                <p>
+                Look for Blowfish in the pain reliever aisle in over 8,500 stores nationwide including CVS. Or, get a really good friend to deliver it directly to your couch and/or bathroom floor.
+                </p>
+              </div>
+  
+               <div class="row">
+                 <div class="col-sm-10 col-md-8 col-lg-7">
+          
+                   <a href="{{section.settings.cta-link}}" class="button  button--medium  button--secondary  button--expanded">
+                   
+                     <span class="button-textState1">{{section.settings.cta-label}}</span>
+                     <span class="button-textState2">{{section.settings.cta-label}}</span>
+                   
+                   </a>
+          
+                 </div>
+          
+               </div>
+      
+            </div>
+      
+          </div>
+      
+        </div>
+    </div>
+  
+  </section>
+</div>
+<!--End 404--> 
+
+
+
+{%schema%}
+{
+  "name": "404 Page",
+  "settings": [
+    {
+      "type": "text", 
+      "id": "headline", 
+      "label": "Headline"
+    },
+    {
+      "type": "richtext", 
+      "id": "body", 
+      "label": "Body"
+    },
+    {
+      "type": "url", 
+      "id": "cta-link", 
+      "label": "CTA Link"
+    },
+    {
+      "type": "text", 
+      "id": "cta-label", 
+      "label": "Body"
+    }
+  ]
+}
+
+{%endschema%}

@@ -1,0 +1,172 @@
+
+
+
+<section class="featured-products-section"
+           data-section-id="{{ section.id }}" data-section-type="featuredProducts"  data-template="{{ template.name }}" >
+  <div class="container-fluid  container-fluid--flushed ">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="featured-products-section__inner">
+
+          <div class="featured-products-section__header">
+            <h2 class="featured-products-section__header__headline  headline">
+              {{section.settings.headline}}
+            </h2>
+          </div>
+
+          <ul class="featured-products-section__products"  data-featured-products-container>
+            {% for block in section.blocks%}
+              {% case block.type%}
+                {% when 'product'%}
+                <li data-featured-product >
+                  {% assign product_information = all_products[block.settings.product] %}
+                  <div class="featured-products-section__products__product">
+                    <a data-product-link  class="featured-products-section__products__product__link-area" href="{{product_information.url}}" rel="internal" title="{{product_information.title}}">
+
+                     </a>
+
+                    <div class="featured-products-section__products__product__inner">
+
+
+
+                      <div class="featured-products-section__products__product__image">
+                        <picture>
+                          <source data-srcset="{{ product_information.images[0].src | img_url: '700x' }}" media="(min-width: 64.0625em)">
+                          <source data-srcset="{{ product_information.images[0].src | img_url: '500x' }}" media="(min-width: 43.8125em)">
+                          <img data-src="{{ product_information.images[0].src | img_url: '450x' }}" alt="{{ product.images[0].alt | escape }}" class="lazyload">
+                        </picture>  
+                      </div>
+
+
+                      <div class="featured-products-section__products__product__information">
+                        <h3 class="featured-products-section__products__product__information__name">
+                          {{product_information.title}}
+                        </h3>  
+                        <p class="featured-products-section__products__product__information__tablet-count">
+                          {{product_information.metafields.product['tablet_count']}}
+                        </p>      
+
+                        {%if section.settings.price-location == 'outside-button'%}
+                        <p class="featured-products-section__products__product__information__price">
+                          {{product_information.price  | money_without_trailing_zeros}}
+                        </p>                   
+                        {%endif%}
+                      </div>
+
+                
+                      <div class="featured-products-section__products__product__actions">
+                      {% form 'product', product_information, data-product-form: '', data-product-handle: product_information.handle, data-enable-history-state: 'true' %}
+
+                      <select name="id"  data-product-variants hidden>
+                          {%for variant in product_information.variants%}
+                            <option  value="{{variant.id}}" selected>{{variant.id}}</option>
+                          {%endfor%}
+                      </select>
+
+                        <button class="button  button--small  button--secondary  button--expanded  product__actions__button" type="submit"
+                                name="add"
+                                data-add-to-cart
+                                type="submit"
+                                aria-label="Add {{product_information.title}} to cart"
+                                data-text="{{product_information.price  | money_without_trailing_zeros}} - Add to Cart"
+                                id="AddToCart--{{section.id}}">
+                            <span data-button-text class="button-textState1">
+                            {%if section.settings.price-location == 'inside-button'%}
+                               {{product_information.price  | money_without_trailing_zeros}} - {%endif%} Add to Cart 
+                            </span>
+                            <span data-button-text class="button-textState2">
+                                 {%if section.settings.price-location == 'inside-button'%}
+                              {{product_information.price  | money_without_trailing_zeros}} - {%endif%}Add to Cart 
+                            </span>
+                        </button>
+                     {%endform%}
+                      </div>
+                      <a rel="internal" title="Read Blowfish reviews" href="/products/starter-pack-20-tablets#reviews">
+                        <div class="featured-products-section__products__product__rating  yotpo bottomLine"  data-product-id="{{ product_information.id }}">
+                            {%- assign yotpo_offload_content = shop.metafields.yotpo.yotpo_offload_content %}
+                            {%- assign time_now = 'now' | date: '%s' %}
+                            {%- assign yotpo_live_time = shop.metafields.yotpo.yotpo_live | date: '%s' %}
+                            {%- assign diff_seconds_from_live = time_now | minus: yotpo_live_time %}
+                            {%- assign yotpo_bottomline_last_updated = product.metafields.yotpo.bottomline_update_time | date: '%s' %}
+                            {%- assign diff_seconds_from_last_bottomline_update = time_now | minus: yotpo_bottomline_last_updated %}
+                            {%- if yotpo_live_time and diff_seconds_from_live < 86400 and yotpo_bottomline_last_updated and diff_seconds_from_last_bottomline_update < 86400 -%}
+                             {%- assign yotpo_bottomline_obsolete = false %}
+                            {%- else %}
+                                    {%- assign yotpo_bottomline_obsolete = true %}
+                     {%- endif %}
+                            {%- if yotpo_offload_content == 'yes' and yotpo_bottomline_obsolete != true -%}
+                             {{ product.metafields.yotpo.bottomline }}
+                            {%- endif %}
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+              {%endcase%}
+            {%endfor%}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Featured Products",
+    "max_blocks": 4,
+    "settings": [
+      {
+        "type": "header",
+        "content": "Featured Products"
+      },
+      {
+        "type": "text",
+        "id": "headline",
+        "label": "Heading",
+        "default": "How much blowfish today?"
+      },
+      {
+        "type": "select",
+        "id": "price-location",
+        "label": "Price Location", 
+        "options": [
+          {
+            "group": "price-location", 
+            "value": "inside-button",
+            "label": "Inside Button"
+          },
+          {
+            "group": "price-location", 
+            "value": "outside-button",
+            "label": "Outside Button"
+          }
+        ],
+        "default": "outside-button", 
+        "info": "The location of the product's price."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "product",
+        "name": "Product",
+        "settings": [
+          {
+            "id": "product",
+            "type": "product",
+            "label": "Product"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Products",
+        "category": "Product",
+        "settings": {
+          "headline": "How much blowfish today?"
+        }
+      }
+    ]
+  }
+{% endschema %}

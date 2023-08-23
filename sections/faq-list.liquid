@@ -1,0 +1,158 @@
+
+
+<div class="section--main">
+  <section >
+    <div class="wrapper">
+      <div class="container-fluid">
+        <div class="faq">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="faq__header">
+                <h1 class="faq__headline {%if settings.altHeadlineOn %}headline--alt {%endif%}">
+                  {{section.settings.headline}}
+                </h1>
+              </div>
+            </div>
+          </div>  
+        
+          <div class="row center-sm">
+            <div class="col-sm-12 col-md-11">
+              <ul class="faq__list" data-accordion>
+                {%for block in section.blocks%}
+                  <li>
+                    <div class="faq__item" data-faq-item>
+                      <a class="faq__question" data-question data-panel-id="{{forloop.index}}" role="button">
+                        {{block.settings.question}}
+                      </a>
+                      <span class="faq__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129"><title>Arrow Icon</title><path d="M121.3 34.6c-1.6-1.6-4.2-1.6-5.8 0l-51 51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8 0-1.6 1.6-1.6 4.2 0 5.8l53.9 53.9c.8.8 1.8 1.2 2.9 1.2 1 0 2.1-.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2.1-5.8z"/></svg>
+                      </span>
+                      <div data-panel-id="{{forloop.index}}" data-answer class="faq__answer">
+                        {{block.settings.answer}}
+                      </div>
+                    </div>
+                  </li>
+                {%endfor%}
+              </ul>
+            </div>
+          </div>
+        
+          <div class="row center-sm">
+            <div class="col-sm-12 col-md-11">
+              <div class="faq__footer">
+                 <p> For Drug Facts click <a href="{{'Drug_Facts.pdf' | asset_url}}"  target="_blank" rel="internal">here</a>. <br>
+                  For Privacy Policy click <a href="/pages/privacy-policy" rel="internal">here</a>. <br>
+                  For Terms & Conditions click <a href="/pages/terms-and-conditions" rel="internal">here</a>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline"
+    },
+    {
+      "id": "other_info",
+      "type": "richtext",
+      "label": "Other Information"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        {
+          "id": "question",
+          "type": "text",
+          "label": "Question"
+        },
+        {
+          "id": "answer",
+          "type": "richtext",
+          "label": "Answer"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+{%javascript%}
+//<script>
+
+//
+//Initiates Animations for accordions on the page if there are available
+// 
+
+$(document).ready(function() {
+
+  if($('[data-accordion]').length > 0) {
+
+
+    (function(e) {
+      e.fn.accordionAnimated = function() {
+          var accordion = this,
+              questions = accordion.find("[data-faq-item]"),
+              answers = questions.find("[data-answer]"),
+              settings = {
+                  active_class: "active",
+                  speed: 400,
+                  retractingSpeed: 600,
+                  toggleable: true,
+                  ease: "swing", 
+                  muti_expand: false
+              };
+
+
+          questions.each(function(index) {
+
+            e(this).find("[data-question]").on("click", function() {
+              var id = $(this).attr('data-panel-id'); 
+
+              if($(this).parent().hasClass('is-active')) {
+                var question = ($(this).parent()); 
+                question.removeClass('is-active');
+                question.find('[data-answer]').stop(true, true).slideUp(settings.speed, settings.ease); 
+                return
+              }
+
+              if (!settings.muti_expand) {
+                questions.removeClass('is-active'); 
+                questions.find('[data-answer]').stop(true, true).slideUp(settings.speed, settings.ease); 
+              }
+
+              $(this).parent().find('[data-answer]').stop(true, true).slideToggle(settings.speed, settings.ease); 
+              $(this).parent('[data-faq-item]').addClass('is-active'); 
+
+            }); 
+          }); 
+
+      };
+
+    })(jQuery);
+
+    $('[data-accordion]').accordionAnimated();
+
+  }
+
+});
+//</script>
+{%endjavascript%}
+

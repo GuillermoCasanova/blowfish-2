@@ -1,0 +1,81 @@
+
+
+<div class="section--main">
+	<section class="section">
+		<div class="wrapper">
+			<div class="container-fluid">
+				<!--Begin headline-->
+				<div class="row center-sm">
+				  <div class="col-sm-12 col-md-10  col-lg-9">
+				    <div class="row  middle-md">
+				      <div class="col-sm-12 col-md-7">
+								<div class="page-header  store-locator-header">
+									<h1 class="headline  store-locator-header__headline {%if settings.altHeadlineOn %}headline--alt {%endif%}">
+									{{section.settings.headline}}
+									</h1>
+
+									<div class="store-locator-header__body">{{section.settings.body}}</div>
+								</div>
+				      </div>
+				
+				      <div class="col-sm-12 col-md-5">
+		            <picture>
+		              <source src="{{section.settings.image | img_url: '700x' }}" media="(min-width: 64.0625em)">
+		              <source src="{{section.settings.image | img_url: '500x' }}" media="(min-width: 43.8125em)">
+		              <img src="{{section.settings.image | img_url: '480x' }}" alt="{{ section.settings.image.alt | escape }}" >
+		            </picture>
+				      </div>
+				    </div>
+				  </div>
+				
+				</div>
+				<!--End Headline-->
+				
+				<div class="row center-sm">
+				    <div class="col-sm-12 col-md-9">
+				      {{section.settings.embed}}
+				    </div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+{%schema%}
+{
+
+  "name": "Store Locator Page", 
+  "settings": [
+	  {	
+			"type": "header", 
+			"content": "Header"
+	  },
+    {
+      "label": "Headline", 
+      "id": "headline",
+      "type": "text"
+    },
+    {
+      "label": "Copy", 
+      "id": "body",
+      "type": "richtext"
+    },
+    {
+      "label": "Store Locator Image", 
+      "id": "image",
+      "type": "image_picker"
+    },
+ 	  {	
+			"type": "header", 
+			"content": "Embed Code"
+	  },
+    {
+      "label": "Store Locator Embed", 
+      "id": "embed",
+      "type": "html"
+    }
+  ]
+}
+{%endschema%}
+
+

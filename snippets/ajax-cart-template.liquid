@@ -1,0 +1,180 @@
+<!-- /snippets/ajax-cart-template.liquid -->
+{% comment %}
+
+  This snippet provides the default handlebars.js templates for
+  the ajax cart plugin. Use the raw liquid tags to keep the
+  handlebar.js template tags as available hooks.
+
+{% endcomment %}
+<script id="CartTemplate" type="text/template"> 
+  {% raw %}
+
+
+
+    <form action="/cart" method="post" novalidate class="off-canvas-cart__inner">
+
+      <div class="off-canvas-cart__header">
+        <h1 class="off-canvas-cart__header__headline">
+        Your Cart
+        </h1>
+      </div>
+
+
+      <div class="off-canvas-cart__contents">
+
+        {{#items}}
+        <div class="off-canvas-cart__product" data-line="{{line}}">
+          <a href="{{url}}" tabindex="-1">
+          <img src="{{img}}" alt="{{name}}" class="off-canvas-cart-product__image">
+          </a>
+
+          <div class="off-canvas-cart-product__info ">
+
+             <ul>
+
+              <li>
+                <a href="{{url}}" title="View {{{name}}}" rel="internal" class="off-canvas-cart-product__name">{{{name}}}</a>
+              </li>
+
+              <li class="off-canvas-cart-product__price-properties">
+
+                <div class="off-canvas-cart__product__properties">
+                  {{#if variation}}
+                    {{#options}}
+                        <span>{{name}}</span> : <span>{{value}}</span>
+                    {{/options}}
+                  {{/if}}
+                  
+                  {{#properties}}
+                    {{#each this}}
+                      {{#if this}}
+                        <span>{{@key}}: {{this}}</span>
+                      {{/if}}
+                    {{/each}}
+                  {{/properties}}
+                </div>
+
+                <div class="off-canvas-cart__product__price"> 
+                 {{#if discountsApplied}}
+                  <small>{{{price}}}</small>
+                  <span >
+                    {{{discountedPrice}}}
+                  </span>
+                {{else}}
+                  <span class="ajaxcart__price">
+                    {{{price}}}
+                  </span>
+                {{/if}}
+                </div>
+            </li>
+
+              <li class="off-canvas-cart-product__qty">
+                <label for="{{key}}" class="visually-hidden">
+                Qty. 
+                </label>
+
+                <div  class="off-canvas-cart-product__qty__actions">
+               
+                  <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--plus icon-fallback-text" data-id="{{key}}" data-line="{{line}}" data-qty="{{itemAdd}}" aria-label="{% endraw %}{{ 'cart.general.increase_quantity' | t }}{% raw %}">
+                    <span class="fallback-text" aria-hidden="true">+</span>
+                  </button>
+
+                  <input type="text" name="updates[]" class="ajaxcart__qty-num" value="{{itemQty}}" min="0" id="{{key}}" data-id="{{key}}" data-line="{{line}}" aria-label="quantity" pattern="[0-9]*">
+
+                    <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus icon-fallback-text" data-id="{{key}}" data-qty="{{itemMinus}}" data-line="{{line}}" aria-label="{% endraw %}{{ 'cart.general.reduce_quantity' | t }}{% raw %}">
+                    <span class="fallback-text" aria-hidden="true">&minus;</span>
+                  </button>
+                </div>
+               
+              </li>
+
+              {{#if discountsApplied}}
+                <div class="grid--full display-table">
+                  <div class="grid__item text-right">
+                    {{#each discounts}}
+                      <small class="ajaxcart__discount">{{this.title}}</small>
+                    {{/each}}
+                  </div>
+                </div>
+              {{/if}}
+
+            </ul>
+
+            <span class="off-canvas-cart-product-remove  ajaxcart__qty-remove" data-line="{{line}}">
+                Remove
+            </span>
+          </div>
+
+       
+        </div>
+        {{/items}}
+
+      </div>
+
+
+      <div class="off-canvas-cart__footer">
+
+        <div class="off-canvas-cart__total">
+          <p class="ajaxcart__subtotal">{% endraw %}{{ 'cart.general.subtotal' | t }}{% raw %}</p>
+          <p class="off-canvas-cart__total__amount">{{{totalPrice}}}</p>
+        </div>
+
+        <div class="off-canvas-cart-discounts">
+        {{#if totalCartDiscount}}
+            <p class="ajaxcart__savings text-center">{{{totalCartDiscount}}}</p>
+          {{/if}}
+        </div>
+
+        <div class="off-canvas-cart__shipping">
+          <p>
+            Shipping
+          </p>
+          <p>
+            {% endraw %}
+          {{ 'cart.general.shipping_at_checkout' | t }}</p> 
+          {% raw %}
+        </div>
+     
+        <div class="off-canvas-cart-actions">
+          <button type="submit" name="checkout" class="button  button--large  button--expanded  button--secondary  off-canvas-cart__checkout-btn" name="checkout" data-text="{% endraw %}{{ 'cart.general.checkout' | t }}{% raw %}">
+            <span class="button-textState1">{% endraw %}{{ 'cart.general.checkout' | t }}{% raw %} </span>
+            <span class="button-textState2">{% endraw %}{{ 'cart.general.checkout' | t }}{% raw %} </span>
+          </button>
+        </div>
+      </div>
+    </form>
+  {% endraw %}
+  </script>
+
+  <script id="AjaxQty" type="text/template">
+  {% raw %}
+    <div class="ajaxcart__qty">
+      <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus icon-fallback-text" data-id="{{key}}" data-qty="{{itemMinus}}" aria-label="{% endraw %}{{ 'cart.general.reduce_quantity' | t }}{% raw %}">
+        <span class="icon icon-minus" aria-hidden="true"></span>
+        <span class="fallback-text" aria-hidden="true">&minus;</span>
+      </button>
+      <input type="text" class="ajaxcart__qty-num" value="{{itemQty}}" min="0" data-id="{{key}}" aria-label="quantity" pattern="[0-9]*">
+      <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--plus icon-fallback-text" data-id="{{key}}" data-qty="{{itemAdd}}" aria-label="{% endraw %}{{ 'cart.general.increase_quantity' | t }}{% raw %}">
+        <span class="icon icon-plus" aria-hidden="true"></span>
+        <span class="fallback-text" aria-hidden="true">+</span>
+      </button>
+    </div>
+  {% endraw %}
+  </script>
+  
+  <script id="JsQty" type="text/template">
+  {% raw %}
+    <div class="js-qty">
+      <button type="button" class="js-qty__adjust js-qty__adjust--minus icon-fallback-text" data-id="{{key}}" data-qty="{{itemMinus}}" aria-label="{% endraw %}{{ 'cart.general.reduce_quantity' | t }}{% raw %}">
+        <span class="icon icon-minus" aria-hidden="true"></span>
+        <span class="fallback-text" aria-hidden="true">&minus;</span>
+      </button>
+      <input type="text" class="js-qty__num" value="{{itemQty}}" min="1" data-id="{{key}}" aria-label="quantity" pattern="[0-9]*" name="{{inputName}}" id="{{inputId}}">
+      <button type="button" class="js-qty__adjust js-qty__adjust--plus icon-fallback-text" data-id="{{key}}" data-qty="{{itemAdd}}" aria-label="{% endraw %}{{ 'cart.general.increase_quantity' | t }}{% raw %}">
+        <span class="icon icon-plus" aria-hidden="true"></span>
+        <span class="fallback-text" aria-hidden="true">+</span>
+      </button>
+    </div>
+  {% endraw %}
+  </script>
+

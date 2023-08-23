@@ -1,0 +1,46 @@
+{% comment %}
+  This page represents the /collections and /products pages.
+{% endcomment %}
+
+<section class="collection-container section  section--main">
+  <div class="container-fluid">
+  
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="product-page-headline">
+          Blowfish Collections
+        </h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="row  center-smc">
+          {% for collection in collections %}
+            <div class="col-sm-12 col-md-6">
+              {% unless collection.handle == 'frontpage' %}
+                <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: title }}">
+                  {% if collection.image != blank or collection.products.first != blank %}
+                    {%- assign image_object = collection.image | default: collection.products.first.featured_image -%}
+                    <picture>
+                      <source srcset="{{ image_object.src | img_url: '900x' }}" media="(min-width: 64.0625em)">
+                      <source srcset="{{ image_object.src | img_url: '700x' }}" media="(min-width: 43.8125em)">
+                      <img src="{{ image_object.src | img_url: '450x' }}" alt="{{ image_object.alt | escape }}">
+                    </picture>
+                  {% else %}
+                    {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                    {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+                  {% endif %}
+                </a>
+
+                <p>
+                  <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: title }}">{{ collection.title }}</a>
+                </p>
+              {% endunless %}
+            </div>
+          {% endfor %}
+        </div>
+        </div>
+      </div>
+    </div>
+</section>
