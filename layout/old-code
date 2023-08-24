@@ -1,0 +1,38 @@
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WLV3TM7');
+
+window.cp = {};
+  window.osb2 = {};
+  window.osb2.hitid =  new Date().valueOf().toString() + Math.random().toString() + 0;
+
+  window.cp.config = {
+     "endpoint": "https://eq.forhangovers.com"
+  };
+
+ window.cp.sendImage = function() {
+       var img = new Image();
+        img.src = window.cp.config.endpoint + '/img?' + 'url=' + encodeURIComponent(document.URL) + '&ts=' + new Date().getTime() + '&eid=' + window.osb2.hitid  + '&checkouttoken=' + window.cp.token;
+    };
+   var intid = setInterval(() => {
+      if (typeof Shopify !== "undefined"){
+             if (typeof Shopify.Checkout !== "undefined"){
+               if (typeof Shopify.Checkout.token !== "undefined"){
+                  window.cp.token = Shopify.Checkout.token;
+               }
+             }else{
+                 // If Checkout isn't defined, kill the internal because this isn't a checkout page.
+                 clearInterval(intid);
+             }
+           }
+      if (typeof window.cp.token !=="undefined"){
+         clearInterval(intid);
+         window.cp.sendImage();
+       }
+    }, 100);
+
+
+
+    UA-24654793-2
