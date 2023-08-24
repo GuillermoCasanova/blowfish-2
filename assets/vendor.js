@@ -195,7 +195,7 @@ var ajaxCart = function(module, $) {
           t = $("#CartTemplate").html(),
           i = Handlebars.compile(t);
       $.each(e.items, function(e, t) {
-        console.log(items); 
+        console.log(t.image); 
           var i;
           i = null !== t.image ? t.image.replace(/(\.[^.]*)$/, "_small$1").replace("http:", "") : "//cdn.shopify.com/s/assets/admin/no-image-medium-cc9732cb976dd349a0df1d39816fbcc7.gif", null !== t.properties && $.each(t.properties, function(e, i) {
               "_" !== e.charAt(0) && i || delete t.properties[e]
