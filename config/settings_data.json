@@ -468,6 +468,7 @@
         "blocks": {
           "9f728529-3256-4be8-aea5-074173afc539": {
             "type": "product",
+            "disabled": true,
             "settings": {
               "product": "20-tablets"
             }
