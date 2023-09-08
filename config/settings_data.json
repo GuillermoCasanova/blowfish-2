@@ -48,9 +48,9 @@
         "settings": {
           "announcement_bar_enabled": true,
           "announcement_bar_home_page_only": true,
-          "announcement_bar_text": "Free U.S. Shipping on Orders Over $20",
+          "announcement_bar_text": "Free U.S. Shipping on Orders Over $50",
           "announcement_bar_link_title": "Get free shipping with your order of Blowfish",
-          "announcement_bar_link": "shopify:\/\/products\/20-tablets",
+          "announcement_bar_link": "shopify:\/\/products\/40-tablets",
           "menu": "main-menu",
           "buy-now-link": "shopify:\/\/products\/50-tablet-box",
           "buy-now-label": "buy now"
@@ -214,6 +214,7 @@
       },
       "1566395551511": {
         "type": "store-locator-section",
+        "disabled": true,
         "settings": {
           "headline": "I Need Blowfish Now",
           "body": "Look for Blowfish in the pain reliever aisle in CVS pharmacies. Or, get a friend to bring it directly to your couch or bathroom floor.",
