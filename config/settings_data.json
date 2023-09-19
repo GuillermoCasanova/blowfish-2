@@ -484,19 +484,12 @@
             "settings": {
               "product": "100-tablet-box"
             }
-          },
-          "9f728529-3256-4be8-aea5-074173afc539": {
-            "type": "product",
-            "settings": {
-              "product": "200-tablet-box"
-            }
           }
         },
         "block_order": [
           "d035029e-63c4-4554-acbb-f47e0f6bf850",
           "aacd8bf8-4dbb-4e38-9b11-62b12d13871b",
-          "19cfd11b-2ae6-412e-b66c-8bd1569288c0",
-          "9f728529-3256-4be8-aea5-074173afc539"
+          "19cfd11b-2ae6-412e-b66c-8bd1569288c0"
         ],
         "settings": {
           "headline": "Our Best Sellers",
