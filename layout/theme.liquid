@@ -52,7 +52,8 @@
     {{ content_for_header }}
 
     <meta name="google-site-verification" content="LS4KaBf47s8mkTfkR3fZNZGdK8tXSvNX7hzh_L1-XqY">
-  </head>
+  {% include 'yotpo-widgets-loader-script' %}
+</head>
 
   <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
     {% section 'header' %}
