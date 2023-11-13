@@ -16,8 +16,8 @@
 				<div class="col-sm-12 col-md-11 col-lg-12">
 					<div class="reviews-capture__embed">
 						{%if section.settings.yotpoOn == "on" %}
-							<div class="yotpo yotpo-main-widget" data-product-id="306447417373" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}"></div>
-						{%else%}
+						<div class="yotpo-widget-instance" data-yotpo-instance-id="544652" data-yotpo-product-id="306447417373" data-yotpo-name="{{ product.title | escape }}" data-yotpo-url="{{ shop.url }}{{ product.url }}" data-yotpo-image-url="{{ product.featured_image | product_img_url: "large" | prepend: "https:" | replace: '?', '%3F' | replace: '&','%26'}}" data-yotpo-price="{{ product.price | divided_by: 100.00 }}" data-yotpo-currency="{{ shop.currency }}" data-yotpo-description="{{ product.description | escape }}"></div>
+                        {%else%}
 						{{section.settings.embed}}
 						{%endif%}</div>
 				</div>
