@@ -52,7 +52,7 @@
           "announcement_bar_link_title": "Get free shipping with your order of Blowfish",
           "announcement_bar_link": "shopify:\/\/products\/40-tablets",
           "menu": "main-menu",
-          "buy-now-link": "shopify:\/\/products\/50-tablet-box",
+          "buy-now-link": "shopify:\/\/products\/partybox",
           "buy-now-label": "buy now"
         }
       },
@@ -476,7 +476,7 @@
           "aacd8bf8-4dbb-4e38-9b11-62b12d13871b": {
             "type": "product",
             "settings": {
-              "product": "50-tablet-box"
+              "product": "partybox"
             }
           },
           "19cfd11b-2ae6-412e-b66c-8bd1569288c0": {
