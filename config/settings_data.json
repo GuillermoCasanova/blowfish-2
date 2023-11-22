@@ -50,7 +50,7 @@
           "announcement_bar_home_page_only": true,
           "announcement_bar_text": "Free U.S. Shipping on Orders Over $50",
           "announcement_bar_link_title": "Get free shipping with your order of Blowfish",
-          "announcement_bar_link": "shopify:\/\/products\/personalpack",
+          "announcement_bar_link": "shopify:\/\/products\/personal-pack",
           "menu": "main-menu",
           "buy-now-link": "shopify:\/\/products\/partybox",
           "buy-now-label": "buy now"
@@ -401,7 +401,7 @@
               "code": "pulp22",
               "image": "shopify:\/\/shop_images\/PulpMX_Vanity_URL_Hero_Image.001_51253fbc-7eab-4f3a-8ea2-41fc79f13665.jpg",
               "cta-label": "Use Code Offer",
-              "cta-link": "shopify:\/\/products\/personalpack"
+              "cta-link": "shopify:\/\/products\/personal-pack"
             }
           },
           "1570496542293": {
@@ -470,7 +470,7 @@
           "d035029e-63c4-4554-acbb-f47e0f6bf850": {
             "type": "product",
             "settings": {
-              "product": "personalpack"
+              "product": "personal-pack"
             }
           },
           "aacd8bf8-4dbb-4e38-9b11-62b12d13871b": {
