@@ -52,7 +52,7 @@
           "announcement_bar_link_title": "Get free shipping with your order of Blowfish",
           "announcement_bar_link": "shopify:\/\/products\/personal-pack",
           "menu": "main-menu",
-          "buy-now-link": "shopify:\/\/products\/partybox",
+          "buy-now-link": "shopify:\/\/products\/party-box",
           "buy-now-label": "buy now"
         }
       },
@@ -476,7 +476,7 @@
           "aacd8bf8-4dbb-4e38-9b11-62b12d13871b": {
             "type": "product",
             "settings": {
-              "product": "partybox"
+              "product": "party-box"
             }
           },
           "19cfd11b-2ae6-412e-b66c-8bd1569288c0": {
